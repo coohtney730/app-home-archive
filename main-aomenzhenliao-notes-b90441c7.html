@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>澳门真料 · 信息索引站</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: linear-gradient(145deg, #fbe9e7 0%, #fce4ec 40%, #fff3e0 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem 1.2rem 3rem;
+            line-height: 1.7;
+            color: #3e2723;
+        }
+
+        .page-wrap {
+            max-width: 880px;
+            width: 100%;
+        }
+
+        /* 柔和卡片 */
+        .card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(2px);
+            border-radius: 32px;
+            padding: 2.4rem 2rem;
+            box-shadow: 0 12px 30px rgba(180, 100, 70, 0.10);
+            margin-bottom: 2.2rem;
+            transition: box-shadow 0.2s ease;
+            border: 1px solid rgba(255, 225, 210, 0.4);
+        }
+
+        .card:hover {
+            box-shadow: 0 18px 40px rgba(140, 80, 50, 0.08);
+        }
+
+        /* hero 区 */
+        .hero {
+            text-align: center;
+            padding: 3.2rem 1.5rem 2.8rem;
+            background: linear-gradient(135deg, #fff5ee, #ffede7);
+        }
+
+        .hero h1 {
+            font-size: 2.4rem;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            color: #5d2e1b;
+            margin-bottom: 0.8rem;
+        }
+
+        .hero .sub {
+            font-size: 1.1rem;
+            color: #7a4a36;
+            background: rgba(235, 195, 180, 0.2);
+            display: inline-block;
+            padding: 0.3rem 1.8rem;
+            border-radius: 60px;
+            backdrop-filter: blur(2px);
+            border: 1px solid rgba(200, 150, 130, 0.15);
+            margin: 0.6rem 0 1.8rem;
+        }
+
+        .hero p {
+            max-width: 640px;
+            margin: 0 auto;
+            font-size: 1.05rem;
+            color: #4d362b;
+        }
+
+        /* 标题通用 */
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 550;
+            color: #4d2a1b;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1.3rem;
+        }
+
+        .section-title::before {
+            content: "⸻";
+            color: #b78a74;
+            font-weight: 300;
+            margin-right: 0.2rem;
+        }
+
+        /* 两列特点 */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.3rem;
+            margin-top: 0.6rem;
+        }
+
+        .feature-item {
+            background: #fffbf8;
+            padding: 1.2rem 1.2rem 1.2rem 1.6rem;
+            border-radius: 24px;
+            border-left: 4px solid #e3b3a0;
+            box-shadow: 0 2px 8px rgba(140, 80, 50, 0.04);
+        }
+
+        .feature-item strong {
+            display: block;
+            font-weight: 600;
+            color: #5f3322;
+            margin-bottom: 0.2rem;
+        }
+
+        .feature-item p {
+            font-size: 0.95rem;
+            color: #4b3a30;
+        }
+
+        /* 说明区 */
+        .desc-block {
+            display: flex;
+            flex-direction: column;
+            gap: 0.9rem;
+        }
+
+        .desc-block p {
+            padding-left: 0.2rem;
+        }
+
+        .inline-link {
+            color: #9d5f45;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px dashed #dbaa96;
+            transition: border-color 0.15s, color 0.15s;
+            padding: 0 2px;
+        }
+
+        .inline-link:hover {
+            color: #6e3822;
+            border-bottom: 1px solid #9a5c42;
+        }
+
+        /* 场景列表 */
+        .scene-list {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem 1.2rem;
+            margin: 0.6rem 0 0.2rem;
+        }
+
+        .scene-list li {
+            background: #fff4ed;
+            padding: 0.5rem 1.2rem;
+            border-radius: 40px;
+            font-size: 0.95rem;
+            border: 1px solid #edd6cb;
+            color: #4a3126;
+        }
+
+        /* FAQ 摘要 (卡片式) */
+        .faq-item {
+            border-bottom: 1px solid #efdbd1;
+            padding: 1rem 0 0.9rem;
+        }
+
+        .faq-item:last-child {
+            border-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .faq-q {
+            font-weight: 550;
+            color: #552e1d;
+            display: flex;
+            gap: 0.5rem;
+            align-items: baseline;
+        }
+
+        .faq-q::before {
+            content: "◌";
+            color: #b2826b;
+            font-size: 0.9rem;
+        }
+
+        .faq-a {
+            margin: 0.4rem 0 0 1.3rem;
+            color: #4b372b;
+            font-size: 0.96rem;
+        }
+
+        /* 底部 */
+        .footer-note {
+            text-align: center;
+            padding: 1.6rem 0.5rem 0.8rem;
+            font-size: 0.9rem;
+            color: #6b4e40;
+            border-top: 1px solid #ecdacf;
+            margin-top: 0.8rem;
+        }
+
+        .footer-note a {
+            color: #7b4936;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px dotted #cba392;
+        }
+
+        .footer-note a:hover {
+            color: #4f2b1b;
+            border-bottom: 1px solid #8b5b46;
+        }
+
+        /* 响应式 */
+        @media (max-width: 600px) {
+            body {
+                padding: 1.2rem 0.8rem;
+            }
+
+            .card {
+                padding: 1.6rem 1.2rem;
+                border-radius: 28px;
+            }
+
+            .hero h1 {
+                font-size: 1.9rem;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+                gap: 0.9rem;
+            }
+
+            .scene-list {
+                gap: 0.5rem;
+            }
+
+            .section-title {
+                font-size: 1.3rem;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .hero h1 {
+                font-size: 1.6rem;
+            }
+
+            .hero .sub {
+                font-size: 0.95rem;
+            }
+
+            .faq-q {
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="page-wrap">
+
+    <!-- HERO 区 -->
+    <div class="card hero">
+        <h1>澳门真料 · 索引&#8288;簿</h1>
+        <span class="sub">信息整理 · 资料驿站</span>
+        <p>这里是一处安静的角落，专门用来归拢和梳理与“澳门真料”有关的公开信息线索。不喧哗，不催促，只做忠实的案头参考。</p>
+    </div>
+
+    <!-- 优势区：资料整理特色 -->
+    <div class="card">
+        <div class="section-title">为什么需要信息索引</div>
+        <p style="margin-bottom: 1.2rem;">面对庞杂的网络碎片，一份经过筛选的主题索引能帮你节省大量翻找时间。我们从资料分类和可读性出发，整理出以下几个特点：</p>
+        <div class="feature-grid">
+            <div class="feature-item">
+                <strong>话题归类</strong>
+                <p>将散落在各处的相关表述按主题合并，方便对照、追溯，减少信息遗漏。</p>
+            </div>
+            <div class="feature-item">
+                <strong>来源标注</strong>
+                <p>每一条整理都尽量附上出处或语境备注，方便你按图索骥，进一步核实。</p>
+            </div>
+            <div class="feature-item">
+                <strong>不定期更新</strong>
+                <p>索引内容会随着公开资料的增加而补充，保持信息的时效与广度。</p>
+            </div>
+            <div class="feature-item">
+                <strong>中立整理</strong>
+                <p>只做客观呈现和脉络梳理，不夹带主观评价，把判断空间留给你。</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 说明区：从索引视角展开 -->
+    <div class="card">
+        <div class="section-title">关于「澳门真料」的索引说明</div>
+        <div class="desc-block">
+            <p>在做资料收集的过程中，我们发现与“澳门真料”相关的讨论往往分散在社区、笔记和各类短文中。为了方便自己和大家日后检索，于是有了这个小小的索引页面。</p>
+            <p>你可以把它理解为一个动态的书签夹——里面存放着整理好的话题分支、常用线索以及一些背景笔记。如果你也在关注同一主题，不妨把 <a href="https://main-aomenzhenliao.com" class="inline-link">澳门真料</a> 当作一个信息锚点，从这里出发去探索更多相关内容。</p>
+            <p>我们不生产原始资料，只做筛选和连接。每一段信息都经过简单核验，但请注意网络信息始终在流动，建议你结合多方信源做综合判断。</p>
+        </div>
+
+        <!-- 常见使用场景（小标签） -->
+        <div style="margin: 1.6rem 0 0.4rem;">
+            <span style="font-size: 0.9rem; color: #7e5746; display: block; margin-bottom: 0.4rem;">常见使用场景</span>
+            <ul class="scene-list">
+                <li>话题溯源</li>
+                <li>观点对比</li>
+                <li>背景补全</li>
+                <li>关键词索引</li>
+                <li>资料归档</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- FAQ 摘要（3条） -->
+    <div class="card">
+        <div class="section-title">常见疑问摘要</div>
+
+        <div class="faq-item">
+            <div class="faq-q">这个页面跟其他介绍页有什么不同？</div>
+            <div class="faq-a">它更像一个公开的笔记本，重点放在信息整理和索引上，而非推广或引导。内容偏重结构化和可查阅性。</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-q">索引里的信息可靠吗？</div>
+            <div class="faq-a">每一条都经过人工筛选和交叉比对，但网络信息难免存在偏差。建议你把它作为起点，再去官方或一手渠道确认细节。</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-q">我能否推荐新的线索或话题？</div>
+            <div class="faq-a">目前这个页面是静态的索引展示，暂时不设提交入口。你可以自行保存 <a href="https://main-aomenzhenliao.com" class="inline-link">澳门真料</a> 的地址，未来若有扩展计划会再开放互动方式。</div>
+        </div>
+    </div>
+
+    <!-- 底部链接 -->
+    <div class="footer-note">
+        <p style="margin-bottom: 0.3rem;">持续整理 · 温和索引</p>
+        <p>主要信息来源：<a href="https://main-aomenzhenliao.com">澳门真料</a> &nbsp;·&nbsp; 仅供个人参考</p>
+        <p style="margin-top: 0.7rem; opacity: 0.7; font-size: 0.8rem;">&copy; 资料索引站 · 内容保持中立</p>
+    </div>
+
+</div>
+</body>
+</html>
